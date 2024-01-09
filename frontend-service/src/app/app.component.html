@@ -1,0 +1,39 @@
+<app-nav-bar></app-nav-bar>
+<router-outlet></router-outlet>
+
+<ng-template #invitation>
+    <div class="modal-header">
+        <h4 class="modal-title">Invitation</h4>
+    </div>
+
+    @if(this.invite != undefined){
+    <div class="modal-body">
+        {{this.invite['inviter']}} invited you to play together
+    </div>
+    }
+
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="acceptInvite()">Accept</button>
+        <button type="button" class="btn btn-secondary" (click)="denyInvite()">Deny</button>
+    </div>
+</ng-template>
+
+
+
+
+<ng-template #notify>
+
+    <div class="modal-header">
+        <h4 class="modal-title">Notification</h4>
+    </div>
+
+    <div class="modal-body">
+        {{notification}}
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="closeModal()">Close</button>
+    </div>
+
+</ng-template>

@@ -1,0 +1,101 @@
+<div class="container mt-4">
+
+
+    <div class="row justify-content-center mt-2">
+
+        <div class="col-auto m-1 fs-4">
+            {{output}}
+            <cd-timer #myTimer format="ms" [autoStart]=false [countdown]=true [startTime]="5"
+            (onComplete)="overTime()"></cd-timer>
+        </div>
+
+
+        
+
+    </div>
+
+
+
+    <div *ngFor="let row of field; index as i" class="row text-center justify-content-center">
+
+        <button type="button" *ngFor="let column of row; index as j" class="btn col-3 box m-1 border"
+            [disabled]="disabled" (click)="move(i,j,false)">
+
+            <h1 class="display-1">{{column}}</h1>
+        </button>
+
+    </div>
+
+
+    <div class="row justify-content-between mt-4">
+
+
+        @if (this.game != "") {
+
+        <div class="col-auto m-1 fs-4">X : {{this.game['x_player']}}</div>
+        <div class="col-auto m-1 fs-4 text-end">0 : {{this.game['o_player']}}</div>
+
+
+        } @else {
+
+        <div class="text-center">
+            <div class="spinner-border" role="status">
+                <strong>X0X</strong>
+            </div>
+            <strong class="m-2" role="status">Waiting for opponent..</strong>
+        </div>
+
+        }
+
+
+
+    </div>
+
+
+
+
+
+    <ng-template #disconnected>
+
+        <div class="modal-header">
+            <h4 class="modal-title">Disconnected</h4>
+        </div>
+
+        <div class="modal-body">
+            Your opponent left the game
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+        </div>
+    </ng-template>
+
+
+
+    <ng-template #winner>
+
+        <div class="modal-header">
+            <h4 class="modal-title">Game is over</h4>
+        </div>
+
+        <div class="modal-body">
+
+            @if (this.game['tie'] == true){
+            Draw!
+            } @else {
+            {{this.game['winner']}} won!
+            }
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="replaySame()">Same player</button>
+            <button type="button" class="btn btn-secondary" (click)="replayRandom()">Random player</button>
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+        </div>
+
+    </ng-template>
+
+
+
+
+</div>

@@ -1,0 +1,159 @@
+<div class="container">
+
+    <h1 class="text-body-emphasis mt-4">Tic-tac-toe</h1>
+    <p class="fs-5 col-md-8">This is a class project that involves STOMP (web sockets), OAuth2.0/openIDC, and microservice architecture. 
+        You can play with a random player or send an invitation to a friend.</p>
+
+
+    <hr class="col-12 mb-5">
+
+    <div class="row g-5">
+
+        <div class="col-md-6">
+
+
+            <a routerLink="/game" type="button">
+                <div class="container card p-0 mt-4">
+                    <img src="assets/img/dice-low.png" class="card-img-top" alt="...">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Play with random player</h5>
+                    </div>
+                </div>
+            </a>
+
+
+
+        </div>
+
+        <div class="col-md-6">
+
+            <a type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                <div class="container card p-0 mt-4">
+                    <img src="assets/img/friends-low.png" class="card-img-top" alt="...">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Play with friend</h5>
+                    </div>
+                </div>
+
+            </a>
+
+
+
+
+            @if (isRegistered) {
+
+
+            <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasRight"
+                aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasRightLabel">Friends list</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body">
+
+                    <div class="row mb-3">
+                        <div class="col">
+                            <input type="text" name="receiver" [(ngModel)]="receiver" class="form-control"
+                                placeholder="username">
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                                (click)="sendRequest()">Invite</button>
+
+                        </div>
+
+                        <div class="col-auto">
+                            <button class="btn btn-primary" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasRight">Add</button>
+
+                        </div>
+                    </div>
+
+
+                    <div class="list-group">
+                        <span>*friend list is not working, just for presentation*</span>
+                        <span>*but you can invite friends by the username^*</span>
+                        <div class="list-group-item" *ngFor="let friend of friends">
+
+                            <div class="row">
+                                <div class="col-auto me-auto mt-2">{{friend}}</div>
+                                <div class="col-auto">
+                                    <button type="button" class="btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                            <path
+                                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
+                                        </svg>
+                                    </button>
+
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" class="btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path
+                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                            <path
+                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                        </svg>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
+
+                </div>
+
+
+
+
+            </div>
+
+
+
+
+            } @else {
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasRightLabel">Friends list</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body">
+                    <button type="button" class="btn btn-primary" (click)="login()">Login</button>
+                </div>
+            </div>
+
+            }
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+    <footer class="pt-5 my-5 text-body-secondary border-top">
+        Created by dmytro &middot; &copy; 2023
+    </footer>
+</div>
